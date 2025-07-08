@@ -147,33 +147,46 @@ const themeButton = document.getElementById("theme-button");
 const darkTheme = "dark-theme";
 const iconTheme = "uil-sun";
 
-// Previously selected topic (if user selected)
+// Previously selected theme and icon (if any)
 const selectedTheme = localStorage.getItem("selected-theme");
 const selectedIcon = localStorage.getItem("selected-icon");
 
-// We obtain the current theme that the interface has by validating the dark-theme class
+// Get current state functions
 const getCurrentTheme = () =>
   document.body.classList.contains(darkTheme) ? "dark" : "light";
 const getCurrentIcon = () =>
   themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
 
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+// ✅ Apply dark theme by default on first visit
+if (!selectedTheme) {
+  document.body.classList.add(darkTheme);
+  themeButton.classList.add(iconTheme);
+  localStorage.setItem("selected-theme", "dark");
+  localStorage.setItem("selected-icon", "uil-sun");
+} else {
+  // ✅ Apply user-selected theme
   document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
-    darkTheme,
+    darkTheme
   );
   themeButton.classList[selectedIcon === "uil-moon" ? "add" : "remove"](
-    iconTheme,
+    iconTheme
   );
 }
 
-// Activate / deactivate the theme manually with the button
+// ✅ Theme toggle on button click
 themeButton.addEventListener("click", () => {
-  // Add or remove the dark / icon theme
+  // Optional: smooth animation
+  document.body.classList.add("theme-transition");
+
   document.body.classList.toggle(darkTheme);
   themeButton.classList.toggle(iconTheme);
-  // We save the theme and the current icon that the user chose
+
+  // Save current theme and icon
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
+
+  // Remove animation class after transition
+  setTimeout(() => {
+    document.body.classList.remove("theme-transition");
+  }, 300);
 });
