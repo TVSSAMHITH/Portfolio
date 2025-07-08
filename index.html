@@ -11,6 +11,13 @@
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
     />
+    <script>
+  if (!localStorage.getItem("selected-theme")) {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("dark-theme");
+    });
+  }
+</script>
   </head>
 
   <body oncontextmenu="return false">
