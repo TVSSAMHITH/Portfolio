@@ -8,6 +8,8 @@
   /*======= Colors =======*/
   /* Change Favorite color */
   --hue-color: 240;
+  
+
 
   /*========= HSL Color mode =========*/
   --first-color: hsl(var(--hue-color), 69%, 61%);
@@ -338,6 +340,10 @@ img {
 }
 .home__scroll-arrow {
   font-size: 1.25rem;
+}
+
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /*================== Buttons ===================*/
